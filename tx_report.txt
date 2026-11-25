@@ -1,0 +1,211 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+
+-- Running command `read_verilog uart_tx.v; hierarchy -top uart_tx; proc; opt; stat' --
+
+1. Executing Verilog-2005 frontend: uart_tx.v
+Parsing Verilog input from `uart_tx.v' to AST representation.
+Generating RTLIL representation for module `\uart_tx'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \uart_tx
+
+2.2. Analyzing design hierarchy..
+Top module:  \uart_tx
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 4 switch rules as full_case in process $proc$uart_tx.v:16$1 in module uart_tx.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst in `\uart_tx.$proc$uart_tx.v:16$1'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~4 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\uart_tx.$proc$uart_tx.v:16$1'.
+     1/5: $0\tx_shift_reg[9:0]
+     2/5: $0\bit_index[3:0]
+     3/5: $0\clk_count[15:0]
+     4/5: $0\tx_busy[0:0]
+     5/5: $0\tx[0:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\uart_tx.\tx' using process `\uart_tx.$proc$uart_tx.v:16$1'.
+  created $adff cell `$procdff$55' with positive edge clock and positive level reset.
+Creating register for signal `\uart_tx.\tx_busy' using process `\uart_tx.$proc$uart_tx.v:16$1'.
+  created $adff cell `$procdff$58' with positive edge clock and positive level reset.
+Creating register for signal `\uart_tx.\clk_count' using process `\uart_tx.$proc$uart_tx.v:16$1'.
+  created $adff cell `$procdff$61' with positive edge clock and positive level reset.
+Creating register for signal `\uart_tx.\bit_index' using process `\uart_tx.$proc$uart_tx.v:16$1'.
+  created $adff cell `$procdff$64' with positive edge clock and positive level reset.
+Creating register for signal `\uart_tx.\tx_shift_reg' using process `\uart_tx.$proc$uart_tx.v:16$1'.
+  created $adff cell `$procdff$67' with positive edge clock and positive level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 4 empty switches in `\uart_tx.$proc$uart_tx.v:16$1'.
+Removing empty process `uart_tx.$proc$uart_tx.v:16$1'.
+Cleaned up 4 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_tx.
+<suppressed ~5 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_tx.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_tx'.
+Removed a total of 0 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \uart_tx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$37: \tx_busy -> 1'0
+      Replacing known input bits on port B of cell $procmux$35: \tx_busy -> 1'1
+      Replacing known input bits on port A of cell $procmux$32: \tx_busy -> 1'1
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~5 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \uart_tx.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_tx'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$67 ($adff) from module uart_tx (D = { 1'1 \tx_data 1'0 }, Q = \tx_shift_reg).
+Adding EN signal on $procdff$55 ($adff) from module uart_tx (D = $procmux$43_Y, Q = \tx).
+Adding EN signal on $procdff$61 ($adff) from module uart_tx (D = $procmux$29_Y, Q = \clk_count).
+Adding EN signal on $procdff$64 ($adff) from module uart_tx (D = $procmux$21_Y, Q = \bit_index).
+Setting constant 1-bit at position 9 on $auto$ff.cc:266:slice$68 ($adffe) from module uart_tx.
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_tx..
+Removed 4 unused cells and 30 unused wires.
+<suppressed ~5 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_tx.
+<suppressed ~2 debug messages>
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \uart_tx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \uart_tx.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_tx'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_tx..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_tx.
+
+4.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \uart_tx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \uart_tx.
+Performed a total of 0 changes.
+
+4.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_tx'.
+Removed a total of 0 cells.
+
+4.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_tx..
+
+4.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_tx.
+
+4.23. Finished OPT passes. (There is nothing left to do.)
+
+5. Printing statistics.
+
+=== uart_tx ===
+
+   Number of wires:                 35
+   Number of wire bits:            188
+   Number of public wires:           9
+   Number of public wire bits:      43
+   Number of ports:                  6
+   Number of port bits:             13
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 31
+     $add                            2
+     $adff                           1
+     $adffe                          4
+     $eq                             1
+     $logic_and                      1
+     $logic_not                      1
+     $lt                             1
+     $mux                           12
+     $ne                             2
+     $not                            2
+     $reduce_and                     2
+     $reduce_bool                    1
+     $shiftx                         1
+
+End of script. Logfile hash: f6abd6eb45, CPU: user 0.03s system 0.02s, MEM: 13.85 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 33% 5x opt_expr (0 sec), 19% 3x opt_clean (0 sec), ...
